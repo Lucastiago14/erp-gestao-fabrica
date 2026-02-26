@@ -133,3 +133,98 @@ function renderizarSistema() {
         resultadosBusca.appendChild(card);
     });
 }
+
+async function exportarPDF(tipo = 'referencia') {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const alturaLinha = 8;
+    let y = 12;
+
+    doc.setFontSize(12);
+    doc.text(`Relatório de Fábrica - ${tipo.toUpperCase()}`, 10, y);
+    y += alturaLinha * 2;
+
+    if (tipo === 'referencia') {
+        const filtroAtivo = $('filterStatus').value;
+        const lista = referencias.filter(r => filtroAtivo ? r.status === filtroAtivo : true);
+
+        if (lista.length === 0) {
+            doc.text('Nenhuma referência encontrada.', 10, y);
+        } else {
+            lista.forEach(r => {
+                if (y > 280) { doc.addPage(); y = 12; }
+                const totalReservado = pedidos.filter(p => p.idReferencia === r.id).reduce((soma, p) => soma + Number(p.quantidade || 0), 0);
+                const saldo = r.quantidade - totalReservado;
+
+                doc.setFont("helvetica", "bold");
+                doc.text(`Ref: ${r.codigo} | Ordem: ${r.ordem || '-'}`, 10, y);
+                y += alturaLinha;
+                
+                doc.setFont("helvetica", "normal");
+                doc.text(`Status: ${r.status} | Qtd Produção: ${r.quantidade} | Disponível: ${saldo}`, 10, y);
+                y += alturaLinha * 1.5;
+
+                const pedidosDestaRef = pedidos.filter(p => p.idReferencia === r.id);
+                pedidosDestaRef.forEach(p => {
+                    const cli = clientes.find(c => c.id === p.clientId);
+                    doc.setFontSize(10);
+                    doc.text(`   - Cliente: ${cli ? cli.name : 'Removido'} | Qtd: ${p.quantidade} | Data: ${new Date(p.criado).toLocaleDateString()}`, 10, y);
+                    y += alturaLinha;
+                });
+                y += 4;
+                doc.setFontSize(12);
+            });
+        }
+        doc.save('relatorio_referencias.pdf');
+
+    } else if (tipo === 'cliente') {
+        if (clientes.length === 0) {
+            doc.text('Nenhum cliente cadastrado.', 10, y);
+        } else {
+            clientes.forEach(c => {
+                if (y > 280) { doc.addPage(); y = 12; }
+                doc.setFont("helvetica", "bold");
+                doc.text(`Cliente: ${c.name}`, 10, y);
+                y += alturaLinha;
+
+                const pedidosDoCliente = pedidos.filter(p => p.clientId === c.id);
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(10);
+                
+                if (pedidosDoCliente.length === 0) {
+                    doc.text('   Sem pedidos registrados.', 10, y);
+                    y += alturaLinha;
+                } else {
+                    pedidosDoCliente.forEach(p => {
+                        const ref = referencias.find(r => r.id === p.idReferencia);
+                        doc.text(`   - Ref: ${ref ? ref.codigo : 'Removida'} | Qtd: ${p.quantidade} | Data: ${new Date(p.criado).toLocaleDateString()}`, 10, y);
+                        y += alturaLinha;
+                    });
+                }
+                y += 4;
+                doc.setFontSize(12);
+            });
+        }
+        doc.save('relatorio_clientes.pdf');
+
+    } else if (tipo === 'pedido') {
+        const filtroStatus = $('filterStatusOrders').value;
+        const listaPedidos = pedidos.filter(p => {
+            const ref = referencias.find(r => r.id === p.idReferencia);
+            return filtroStatus && ref ? ref.status === filtroStatus : true;
+        });
+
+        if (listaPedidos.length === 0) {
+            doc.text('Nenhum pedido para exportar.', 10, y);
+        } else {
+            listaPedidos.forEach(p => {
+                if (y > 280) { doc.addPage(); y = 12; }
+                const cli = clientes.find(c => c.id === p.clientId);
+                const ref = referencias.find(r => r.id === p.idReferencia);
+                doc.text(`ID: ${p.id} | Cliente: ${cli ? cli.name : '??'} | Ref: ${ref ? ref.codigo : '??'} | Qtd: ${p.quantidade}`, 10, y);
+                y += alturaLinha;
+            });
+        }
+        doc.save('relatorio_pedidos.pdf');
+    }
+}
