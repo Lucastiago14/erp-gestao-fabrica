@@ -1,0 +1,29 @@
+{
+  "name": "erp-gestao-fabrica",
+  "version": "1.1.0",
+  "description": "ERP de Gestão de Produção",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.lucastiago.erp",
+    "productName": "ITS Fabrica",
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icone.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "installerIcon": "assets/icone.ico",
+      "uninstallerIcon": "assets/icone.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^latest",
+    "electron-builder": "^latest"
+  }
+}
