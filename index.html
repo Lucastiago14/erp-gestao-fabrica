@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Básico IT'S Fabrica</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="aplicativo">
+    <aside class="barra-lateral">
+        <div class="logotipo"><span>IT'S</span> Fabrica</div>
+        <nav>
+            <button class="btn-aba active" data-target="sistema">Sistema</button>
+            <button class="btn-aba" data-target="clientes">Clientes</button>
+            <button class="btn-aba" data-target="pedidos">Pedidos</button>
+        </nav>
+        <footer class="rodape-sidebar">
+            <div>v1.1.0</div>
+            <div>Desenvolvido por Lucas Tiago</div>
+        </footer>
+    </aside>
+
+    <main class="principal">
+        
+        <section id="sistema" class="conteudo-aba" style="display:block">
+            <header class="cabecalho-secao">
+                <h2>Sistema - Pesquisar Referência</h2>
+                <div class="acoes">
+                    <input id="searchRef" placeholder="Pesquisar referência...">
+                    <select id="filterStatus">
+                        <option value="">Todos os status</option>
+                        <option>Sem corte</option>
+                        <option>Corte</option>
+                        <option>Costura</option>
+                        <option>Conferencia</option>
+                        <option>Acabamento</option>
+                        <option>Embalagem</option>
+                        <option>Estoque</option>
+                    </select>
+                    <button id="btnNewRef">+ Cadastrar Referência</button>
+                    <button onclick="exportarPDF('referencia')">Exportar PDF</button>
+                    <button onclick="window.print()">Imprimir</button>
+                </div>
+            </header>
+            <div class="painel">
+                <div class="resultados-busca" id="searchResults"></div>
+            </div>
+
+            <div id="modalRef" class="modal hidden">
+                <div class="cartao-modal">
+                    <h3 id="modalRefTitle">Cadastrar Referência</h3>
+                    <label>Referência <input id="ref_code"></label>
+                    <label>Ordem <input id="ref_order"></label>
+                    <label>Quantidade <input id="ref_qty" type="number"></label>
+                    <label>Status
+                        <select id="ref_status">
+                            <option>Sem corte</option>
+                            <option>Corte</option>
+                            <option>Costura</option>
+                            <option>Conferencia</option>
+                            <option>Acabamento</option>
+                            <option>Embalagem</option>
+                            <option>Estoque</option>
+                        </select>
+                    </label>
+                    <label>Data (criação) <input id="ref_date" type="datetime-local"></label>
+                    <div class="acoes-modal">
+                        <button id="saveRef">Salvar</button>
+                        <button id="cancelRef">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="clientes" class="conteudo-aba" style="display:none">
+            <header class="cabecalho-secao">
+                <h2>Clientes</h2>
+                <div class="acoes">
+                    <input id="searchClient" placeholder="Pesquisar cliente...">
+                    <button id="btnNewClient">+ Novo Cliente</button>
+                    <button onclick="exportarPDF('cliente')">Exportar PDF</button>
+                </div>
+            </header>
+            <div class="painel">
+                <ul id="clientsList" class="lista-padrao"></ul>
+            </div>
+
+            <div id="modalClient" class="modal hidden">
+                <div class="cartao-modal">
+                    <h3 id="modalClientTitle">Novo Cliente</h3>
+                    <label>Nome <input id="client_name"></label>
+                    <div class="acoes-modal">
+                        <button id="saveClient">Salvar</button>
+                        <button id="cancelClient">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pedidos" class="conteudo-aba" style="display:none">
+            <header class="cabecalho-secao">
+                <h2>Pedidos</h2>
+                <div class="acoes">
+                    <input id="searchOrder" placeholder="Pesquisar pedido...">
+                    <button id="btnNewOrder">+ Cadastrar Pedido</button>
+                    <select id="filterStatusOrders">
+                        <option value="">Todos os status</option>
+                        <option>Sem corte</option>
+                        <option>Corte</option>
+                        <option>Costura</option>
+                        <option>Conferencia</option>
+                        <option>Acabamento</option>
+                        <option>Embalagem</option>
+                        <option>Estoque</option>
+                    </select>
+                    <button onclick="exportarPDF('pedido')">Exportar PDF</button>
+                </div>
+            </header>
+            <div class="painel">
+                <ul id="ordersList" class="lista-padrao"></ul>
+            </div>
+
+            <div id="modalOrder" class="modal hidden">
+                <div class="cartao-modal">
+                    <h3 id="modalOrderTitle">Novo Pedido</h3>
+                    <label>Cliente <select id="order_client"></select></label>
+                    <label>Referência <select id="order_ref"></select></label>
+                    <label>Quantidade <input id="order_qty" type="number" min="1"></label>
+                    <label>Data do pedido <input id="order_date" type="datetime-local"></label>
+                    <div class="acoes-modal">
+                        <button id="saveOrder">Salvar</button>
+                        <button id="cancelOrder">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/sistema.js"></script>
+<script src="js/clientes.js"></script>
+<script src="js/pedidos.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

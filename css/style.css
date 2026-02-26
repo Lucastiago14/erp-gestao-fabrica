@@ -1,0 +1,237 @@
+
+:root {
+    --cor-fundo: #f6f6f6;
+    --cor-painel: #ffffff;
+    --cor-destaque: #111111;
+    --cor-texto-mudo: #777777;
+    --sombra-suave: 0 6px 18px rgba(15, 15, 15, 0.06);
+    --borda-cor: #e6e6e6;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background: var(--cor-fundo);
+    color: var(--cor-destaque);
+}
+
+.aplicativo {
+    display: flex;
+    min-height: 100vh;
+}
+
+.barra-lateral {
+    width: 240px;
+    background: linear-gradient(180deg, #ffffff, #f3f3f3);
+    border-right: 1px solid var(--borda-cor);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logotipo {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 24px;
+}
+
+.logotipo span {
+    background: var(--cor-destaque);
+    color: #ffffff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 6px;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.btn-aba {
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 12px;
+    margin: 4px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+.btn-aba.active, .btn-aba:hover {
+    background: var(--cor-destaque);
+    color: #ffffff;
+}
+
+.rodape-sidebar {
+    margin-top: auto;
+    font-size: 12px;
+    color: var(--cor-texto-mudo);
+}
+
+.principal {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.cabecalho-secao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.acoes {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.acoes input, .acoes select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.acoes button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    background: var(--cor-destaque);
+    color: #ffffff;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.painel {
+    background: var(--cor-painel);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-suave);
+    min-height: 450px;
+}
+
+.lista-padrao {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-padrao li {
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ref-card {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ref-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.badge {
+    background: #e1e1e1;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.small {
+    font-size: 13px;
+    color: var(--cor-texto-mudo);
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.cartao-modal {
+    background: var(--cor-painel);
+    padding: 24px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--sombra-suave);
+}
+
+.cartao-modal label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: 500;
+}
+
+.cartao-modal input, .cartao-modal select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--borda-cor);
+}
+
+.acoes-modal {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.small-btn {
+    background: transparent;
+    border: 1px solid #ddd;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.small-btn:hover {
+    background: #eeeeee;
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+}
+
+@media (max-width: 880px) {
+    .barra-lateral { display: none; }
+    .aplicativo { flex-direction: column; }
+}
