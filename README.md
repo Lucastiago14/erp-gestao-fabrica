@@ -12,6 +12,19 @@ O **Básico IT'S Fabrica** é um software de gestão de produção (ERP) desenvo
 
 ---
 
+## 📸 Demonstração do Sistema
+
+### Painel de Sistema (Gestão de Referências)
+<img src="assets/P1.jpg" width="800px" alt="Gestão de Referências">
+
+### Gestão de Clientes
+<img src="assets/P3.jpg" width="800px" alt="Lista de Clientes">
+
+### Controle de Pedidos
+<img src="assets/P4.jpg" width="800px" alt="Vínculo de Pedidos">
+
+---
+
 ## 🏗️ Arquitetura Técnica
 
 O projeto foi construído seguindo princípios de **Separação de Preocupações (SoC)** e modularização em Vanilla JavaScript:
@@ -37,17 +50,3 @@ O projeto foi construído seguindo princípios de **Separação de Preocupaçõe
     ├── exportar.js     # Integração com jsPDF para relatórios
     └── main.js         # Maestro: Controle de navegação e inicialização
 
----
-
-## 📸 Demonstração do Sistema
-
-### Painel de Sistema (Gestão de Referências)
-<img src="assets/P1.jpg" width="800px" alt="Gestão de Referências">
-
-### Gestão de Clientes
-<img src="assets/P3.jpg" width="800px" alt="Lista de Clientes">
-
-### Controle de Pedidos
-<img src="assets/P4.jpg" width="800px" alt="Vínculo de Pedidos">
-
----
